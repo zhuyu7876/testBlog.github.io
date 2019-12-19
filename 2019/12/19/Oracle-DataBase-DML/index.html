@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Oracle DataBase DML | ZhuYu&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Oracle,数据库">
+    <meta name="description" content="第四章 插入更新和删除表数据1. INSERT语句（DML数据操纵语言）1.1  insert语句格式1insert into 表名 (列1,列2,....) values (表达式1,表达式2....)  如果要给表中每一列都插入值，则不需要给出列名，但是必须为表中每个列指定值，并且这些值的顺序必须与create table语句创建表时的顺序一致。对于不知道值的列可设置为空。案例如下: 12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle DataBase DML">
+<meta property="og:url" content="https:&#x2F;&#x2F;zhuyu7876.github.io&#x2F;HexoBlog&#x2F;2019&#x2F;12&#x2F;19&#x2F;Oracle-DataBase-DML&#x2F;index.html">
+<meta property="og:site_name" content="ZhuYu&#39;s Blog">
+<meta property="og:description" content="第四章 插入更新和删除表数据1. INSERT语句（DML数据操纵语言）1.1  insert语句格式1insert into 表名 (列1,列2,....) values (表达式1,表达式2....)  如果要给表中每一列都插入值，则不需要给出列名，但是必须为表中每个列指定值，并且这些值的顺序必须与create table语句创建表时的顺序一致。对于不知道值的列可设置为空。案例如下: 12">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-19T02:04:12.000Z">
+<meta property="article:modified_time" content="2019-12-19T02:05:17.654Z">
+<meta property="article:author" content="ZhuYu">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="ZhuYu&#39;s Blog" href="/HexoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/HexoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/HexoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/HexoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/HexoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">ZhuYu</h5>
+          <a href="mailto:787626629@qq.com" title="787626629@qq.com" class="mail">787626629@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhuyu7876" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/"  >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhuyu.space" target="_blank" rel="noopener"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Oracle DataBase DML</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Oracle DataBase DML</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-19T02:04:12.000Z" itemprop="datePublished" class="page-time">
+  2019-12-19
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第四章-插入更新和删除表数据"><span class="post-toc-number">1.</span> <span class="post-toc-text">第四章 插入更新和删除表数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-INSERT语句（DML数据操纵语言）"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. INSERT语句（DML数据操纵语言）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-insert语句格式"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1.1  insert语句格式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-处理完整性约束"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">1.2 处理完整性约束</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-插入日期和时间"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">1.3 插入日期和时间</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-序列sequence"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">1.4 序列sequence</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-UPDATA语句更新数据"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. UPDATA语句更新数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-使用case结构"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">2.2 使用case结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-DELETE删除"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. DELETE删除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-一般格式"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">3.1 一般格式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-事务Transaction"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. 事务Transaction</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-提交commit"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">4.1 提交commit</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-回滚rollback"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">4.2 回滚rollback</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3保留点-SAVEPOINT"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">4.3保留点 SAVEPOINT</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-触发器-Triggers"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5. 触发器(Triggers)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#before触发器"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">before触发器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#after触发器"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">after触发器</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Oracle-DataBase-DML"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Oracle DataBase DML</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-19 10:04:12" datetime="2019-12-19T02:04:12.000Z"  itemprop="datePublished">2019-12-19</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="第四章-插入更新和删除表数据"><a href="#第四章-插入更新和删除表数据" class="headerlink" title="第四章 插入更新和删除表数据"></a>第四章 插入更新和删除表数据</h1><h2 id="1-INSERT语句（DML数据操纵语言）"><a href="#1-INSERT语句（DML数据操纵语言）" class="headerlink" title="1. INSERT语句（DML数据操纵语言）"></a>1. INSERT语句（DML数据操纵语言）</h2><h3 id="1-1-insert语句格式"><a href="#1-1-insert语句格式" class="headerlink" title="1.1  insert语句格式"></a>1.1  insert语句格式</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名 (列<span class="number">1</span>,列<span class="number">2</span>,....) <span class="keyword">values</span> (表达式<span class="number">1</span>,表达式<span class="number">2.</span>...)</span><br></pre></td></tr></table></figure>
+
+<p>如果要给表中每一列都插入值，则不需要给出列名，但是必须为表中每个列指定值，并且这些值的顺序必须与create table语句创建表时的顺序一致。对于不知道值的列可设置为空。案例如下:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在使用列名插入值的时候，不需要按照列的顺序罗列，但是值的罗列顺序必须与列的顺序相同。</p>
+<h3 id="1-2-处理完整性约束"><a href="#1-2-处理完整性约束" class="headerlink" title="1.2 处理完整性约束"></a>1.2 处理完整性约束</h3><p>在添加包含引用另外一个表的主键的外键值的行以前，被引用表的值必须已经就位。</p>
+<p>首先填充主表，然后再填充从表。或者现将外键列设置为null</p>
+<h3 id="1-3-插入日期和时间"><a href="#1-3-插入日期和时间" class="headerlink" title="1.3 插入日期和时间"></a>1.3 插入日期和时间</h3><p>在插入数值型数据时，不要使用单引号括住它。但字符和日期数据类型却要用单引号。</p>
+<p>录入日期的默认格式为DD-MON-YY 和DD-MON-YYYY。示例如下:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>双位年份如果小于50，则假定是21世纪年份，如果大于50则假定是20世纪年份。</p>
+<p>如果想要用其他日期格式字符串插入数据，则需要使用日期转换函数TO_DATE。TO_DATE函数的一般形式如下:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TO_DATE('日期字符串','格式化字符')</span><br></pre></td></tr></table></figure>
+
+<p>日期格式化字符如下表所示，必须严格按照下表的大小写。日期模式元素之间可以使用/、_和:  。</p>
+<table>
+<thead>
+<tr>
+<th align="center">格式模式符号</th>
+<th align="center">示例值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">MONTH</td>
+<td align="center">FEBRUARY</td>
+</tr>
+<tr>
+<td align="center">Month</td>
+<td align="center">February</td>
+</tr>
+<tr>
+<td align="center">MM</td>
+<td align="center">02</td>
+</tr>
+<tr>
+<td align="center">DD</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td align="center">DDD</td>
+<td align="center">251</td>
+</tr>
+<tr>
+<td align="center">DAY</td>
+<td align="center">WEDNESDAY</td>
+</tr>
+<tr>
+<td align="center">Day</td>
+<td align="center">Wednesday</td>
+</tr>
+<tr>
+<td align="center">DY</td>
+<td align="center">WED</td>
+</tr>
+<tr>
+<td align="center">YYYY</td>
+<td align="center">2006</td>
+</tr>
+<tr>
+<td align="center">YY</td>
+<td align="center">06</td>
+</tr>
+<tr>
+<td align="center">HH</td>
+<td align="center">08小时</td>
+</tr>
+<tr>
+<td align="center">MI</td>
+<td align="center">分钟</td>
+</tr>
+<tr>
+<td align="center">SS</td>
+<td align="center">秒</td>
+</tr>
+<tr>
+<td align="center">AM</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PM</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h3 id="1-4-序列sequence"><a href="#1-4-序列sequence" class="headerlink" title="1.4 序列sequence"></a>1.4 序列sequence</h3><p>序列是一种数据库对象，它生成一系列不同的整数。这些整数通常用作添加到表中的每个新数据的唯一主键。序列生成的整数不会重复，最大值是10的27次方。</p>
+<p>创建序列的语句如下:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">SEQUENCE</span>  seq_name</span><br><span class="line">[<span class="keyword">START</span> <span class="keyword">WITH</span> 起始值]</span><br><span class="line">[<span class="keyword">INCREMENT</span> <span class="keyword">by</span> <span class="keyword">value</span>]</span><br><span class="line">[&#123;MAXVALUE  <span class="keyword">value</span> | <span class="keyword">NOMAXVALUE</span>&#125;]</span><br><span class="line">[&#123;<span class="keyword">MINVALUE</span> <span class="keyword">value</span> | <span class="keyword">NOMINVALUE</span>&#125;]</span><br><span class="line">[&#123;<span class="keyword">CYCLE</span>|<span class="keyword">NOCYCLE</span>&#125;]</span><br><span class="line">[&#123;<span class="keyword">ORDER</span> | <span class="keyword">NOORDER</span>&#125;]</span><br><span class="line">[&#123;<span class="keyword">CACHE</span> <span class="keyword">value</span> | NOCACHE&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>用序列值作为主键，可以使用序列的两个伪列:NEXTVAL和CURRVAL</p>
+<h2 id="2-UPDATA语句更新数据"><a href="#2-UPDATA语句更新数据" class="headerlink" title="2. UPDATA语句更新数据"></a>2. UPDATA语句更新数据</h2><p>单条UPDATA语句每次只能更新一张表，但是可以更新多个列，其一般形式如下:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 表名</span><br><span class="line"> <span class="keyword">SET</span> 列<span class="number">1</span>=表达式<span class="number">1</span>, 列<span class="number">2</span>=表达式<span class="number">2</span>,...</span><br><span class="line">   [<span class="keyword">WHERE</span> 条件]</span><br></pre></td></tr></table></figure>
+
+<p>条件表达式的关系运算符有 =等于、&lt;&gt;或!=,&gt;、&lt;、&lt;=、&gt;=。</p>
+<p>逻辑操作符有</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th>说明</th>
+<th>样例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">AND</td>
+<td></td>
+<td>WHERE year=2019 and year=’2018’</td>
+</tr>
+<tr>
+<td align="center">OR</td>
+<td></td>
+<td>where year=2019 or year=2018</td>
+</tr>
+<tr>
+<td align="center">NOT</td>
+<td>否定</td>
+<td>where not year = 2019</td>
+</tr>
+<tr>
+<td align="center">IN</td>
+<td>值是否在列出的离散集合中</td>
+<td>where year in (2019,2018,2017)</td>
+</tr>
+<tr>
+<td align="center">BETWEEN….AND….</td>
+<td>值在范围之间，包括边界值</td>
+<td>where year between 2010 and 2019</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-使用case结构"><a href="#2-2-使用case结构" class="headerlink" title="2.2 使用case结构"></a>2.2 使用case结构</h3><p>case的一般语法为:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CASE</span><br><span class="line">   WHEN 条件1  THEN result1</span><br><span class="line">   WHEN 条件2  THEN result2</span><br><span class="line">   ...</span><br><span class="line">   [ELSE 默认值]</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-DELETE删除"><a href="#3-DELETE删除" class="headerlink" title="3. DELETE删除"></a>3. DELETE删除</h2><h3 id="3-1-一般格式"><a href="#3-1-一般格式" class="headerlink" title="3.1 一般格式"></a>3.1 一般格式</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> [<span class="keyword">FROM</span>] 表名 [<span class="keyword">WHERE</span> 条件]</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-事务Transaction"><a href="#4-事务Transaction" class="headerlink" title="4. 事务Transaction"></a>4. 事务Transaction</h2><p>数据库事务是一组语句，它们共同组成一个逻辑单元，是一组不可分开的SQL语句，这些SQL语句在执行时要么一起成功要么一起失败。</p>
+<p>事务不用明确的指定开始时间，只要一连上oracle事务就会自动开始，并在提交当前事务时结束。在一个事务结束时，另一个事务就自动开始。</p>
+<h3 id="4-1-提交commit"><a href="#4-1-提交commit" class="headerlink" title="4.1 提交commit"></a>4.1 提交commit</h3><p>当事务执行成功要执行commit语句，将事务的执行结果固定下来。</p>
+<h3 id="4-2-回滚rollback"><a href="#4-2-回滚rollback" class="headerlink" title="4.2 回滚rollback"></a>4.2 回滚rollback</h3><p>当事务执行失败时，要执行rollback语句，将数据恢复到之前的某个时间点。</p>
+<ol>
+<li><p>事务的回滚不能跨事务</p>
+</li>
+<li><p>当rollback后没有指明时间点，则数据回滚到上一条事务结束之后。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rollback;</span><br></pre></td></tr></table></figure>
+
+<p>指定时间点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rollback to pointname;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li>当rollback后又指明savepoint,则数据回滚到savepoint所指示的时间点。</li>
+</ol>
+<h3 id="4-3保留点-SAVEPOINT"><a href="#4-3保留点-SAVEPOINT" class="headerlink" title="4.3保留点 SAVEPOINT"></a>4.3保留点 SAVEPOINT</h3><p>设置要回滚的时间点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">savepoint  pointname;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="5-触发器-Triggers"><a href="#5-触发器-Triggers" class="headerlink" title="5. 触发器(Triggers)"></a>5. 触发器(Triggers)</h2><p>表触发器: 与数据库表相关联的触发器。通常用来监控表的状态，一般是在执行了Delete、Update或者Insert语句后，表中的数据发生了改变时需要触发执行一段PL/SQL代码。</p>
+<p>触发器语句格式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> tg_name</span><br><span class="line">(<span class="keyword">BEFORE</span> | <span class="keyword">AFTER</span> | INSTEAD <span class="keyword">OF</span>) &lt;<span class="keyword">trigger</span>-<span class="keyword">event</span>&gt; <span class="keyword">on</span> table_name</span><br><span class="line">[<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span> [<span class="keyword">WHEN</span> &lt;条件&gt;]]</span><br><span class="line">[<span class="keyword">DECLARE</span></span><br><span class="line">   声明变量</span><br><span class="line">]</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  pl/<span class="keyword">sql</span>代码</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+
+<p>触发器是跟踪表中数据的变化，从而执行指定的sql代码，所以它需要记录下来表中数据变化之前的值，和变化之后的值。这些值保存在:OLD 和:NEW两个变量中。</p>
+<p>​     触发器相关名OLD和NEW提供的值</p>
+<ol>
+<li>Insert 语句</li>
+</ol>
+<p>​       NEW代表  导致触发器触发的inster语句中所有为列提供的值</p>
+<p>​       OLD代表null</p>
+<ol start="2">
+<li><p>UPDATE语句<br>NEW 代表导致触发器触发的update语句中为列提供的值</p>
+<p>OLD代表导致触发器触发的update语句执行前最后一次提交的列值</p>
+</li>
+<li><p>DELETE语句</p>
+<p>NEW 是NULL</p>
+<p>OLD代表导致触发器触发的DELETE语句执行前最后一次提交的列值</p>
+</li>
+</ol>
+<h3 id="before触发器"><a href="#before触发器" class="headerlink" title="before触发器"></a>before触发器</h3><p>在语句执行之前触发</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tg_stuid</span><br><span class="line"><span class="keyword">Before</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> student <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="keyword">select</span> sq_stuid.nextval <span class="keyword">into</span> :NEW.stuid <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上面的触发器是before触发器  ，它会在student表insert新记录之前，执行sq_stuid序列获得新的序列值，并替换掉插入的新数据中的stuid这一列的值。这样我们在用insert语句往student表插入新数据时不必指明stuid了，触发器会帮我们自动插入新的序列值作为id.</p>
+<h3 id="after触发器"><a href="#after触发器" class="headerlink" title="after触发器"></a>after触发器</h3><p>在语句执行之后触发.</p>
+<p>使用After触发器完成将删除的数据自动备份到另一张备份表中。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tg_stu_bak</span><br><span class="line"><span class="keyword">After</span> <span class="keyword">delete</span> <span class="keyword">on</span> student <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="comment">-- 获取要删除的记录，并将其插入到备份表中</span></span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> student_bak <span class="keyword">values</span>(:OLD.stuid,:OLD.name,:OLD.sex);</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<p>完成审计功能:</p>
+<p>当有人修改了student表时，我希望记录下谁在什么时候做了什么修改。</p>
+<p>需要创建审计日志表，审计日志表包含所做的操作类型，执行时间，所涉及的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> STUDENT_log<span class="comment">--审计日志表</span></span><br><span class="line">(</span><br><span class="line">  <span class="keyword">event</span> <span class="keyword">nvarchar2</span>(<span class="number">20</span>),   <span class="comment">--操作类型</span></span><br><span class="line">  beforeafter  <span class="keyword">nvarchar2</span>(<span class="number">20</span>), <span class="comment">--记录的新旧</span></span><br><span class="line">  log_user     <span class="keyword">nvarchar2</span>(<span class="number">20</span>),<span class="comment">--记录执行操作的用户</span></span><br><span class="line">  log_time     <span class="built_in">date</span>,<span class="comment">--操作时间</span></span><br><span class="line">  stuid <span class="built_in">NUMBER</span>,</span><br><span class="line">  <span class="keyword">name</span>  <span class="keyword">NVARCHAR2</span>(<span class="number">20</span>),</span><br><span class="line">  sex   <span class="built_in">CHAR</span>(<span class="number">2</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>创建after触发器</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tg_stu_log</span><br><span class="line"><span class="keyword">after</span> <span class="keyword">update</span> <span class="keyword">on</span> student <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="comment">--记录下更新之前的数据</span></span><br><span class="line">  <span class="keyword">insert</span> <span class="keyword">into</span> student_log <span class="keyword">values</span></span><br><span class="line">  (<span class="string">'update'</span>,<span class="string">'before'</span>,<span class="keyword">user</span>,<span class="keyword">sysdate</span>,:OLD.stuid,:OLD.name,:OLD.sex);</span><br><span class="line">  <span class="comment">--记录下更新之后的数据</span></span><br><span class="line">  <span class="keyword">insert</span> <span class="keyword">into</span> student_log <span class="keyword">values</span></span><br><span class="line">  (<span class="string">'update'</span>,<span class="string">'after'</span>,<span class="keyword">user</span>,<span class="keyword">sysdate</span>,:NEW.stuid,:NEW.name,:NEW.sex);</span><br><span class="line">  </span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<p>作业：</p>
+<p>创建一个用户信息表userinfo，有如下几列 </p>
+<ol>
+<li><p>userid   username用户名  pwd密码  email邮箱 mobile手机号码</p>
+</li>
+<li><p>创建一个序列sq_userid用作userid的序列号生成器</p>
+</li>
+<li><p>创建before触发器tg_userid,用来自动插入userid的序列号</p>
+</li>
+<li><p>用insert 语句插入5条测试记录,insert语句不需要指明userid的值，</p>
+<p>由第3部创建的tg_userid触发器自动生成。</p>
+</li>
+<li><p>创建一个userinfo_bak备份表，表结构和userinfo完全一样</p>
+</li>
+<li><p>创建一个after触发器，能够自动将userinfo表中删除的记录备份到</p>
+<p>userinfo_bak表中</p>
+</li>
+<li><p>创建一个userinfo_log日志表，其表结构</p>
+<p>event 操作名  beforeafter时间标志, log_user操作的用户名,</p>
+<p>log_time操作时间,其它列与userinfo表一致</p>
+</li>
+</ol>
+<p>​        这张表用于存储对userinfo所做操作的日志记录。</p>
+<ol start="8">
+<li><p>创建一个after触发器，当用update语句修改userinfo表中记录时，</p>
+</li>
+<li><p>能够在userinfo_log日志表中插入2条日志记录，第一条日志记录内容为</p>
+<p>执行操作的类型以及执行操作的用户名和时间还有记录修改之前的值。</p>
+<p>第二条日志记录内容为记录修改之后的值。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-19T02:05:17.654Z" itemprop="dateUpdated">2019-12-19 10:05:17</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/HexoBlog/2019/12/19/Oracle-DataBase-DML/" target="_blank" rel="external">https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://zhuyu7876.github.io/HexoBlog">
+            <img src="/HexoBlog/img/avatar.jpg" alt="ZhuYu">
+            ZhuYu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/HexoBlog/tags/Oracle/" rel="tag">Oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/HexoBlog/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/&title=《Oracle DataBase DML》 — ZhuYu's Blog&pic=https://zhuyu7876.github.io/HexoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/&title=《Oracle DataBase DML》 — ZhuYu's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Oracle DataBase DML》 — ZhuYu's Blog&url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/&via=https://zhuyu7876.github.io/HexoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">阿里云RDS数据库热备份的恢复</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        ~谢谢老板~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/HexoBlog/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/HexoBlog/img/wechat.png" data-alipay="/HexoBlog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/HexoBlog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>ZhuYu &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/&title=《Oracle DataBase DML》 — ZhuYu's Blog&pic=https://zhuyu7876.github.io/HexoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/&title=《Oracle DataBase DML》 — ZhuYu's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Oracle DataBase DML》 — ZhuYu's Blog&url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/&via=https://zhuyu7876.github.io/HexoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhuyu7876.github.io/HexoBlog/2019/12/19/Oracle-DataBase-DML/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/HexoBlog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '好像崩溃了？？？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

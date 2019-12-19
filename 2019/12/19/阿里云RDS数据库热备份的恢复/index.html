@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>阿里云RDS数据库热备份的恢复 | ZhuYu&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据库,阿里云">
+    <meta name="description" content="阿里云RDS数据库热备份的恢复一.xtrabackup数据库热备份软件介绍阿里云的RDS数据库热备份是采用的xtrabackup备份软件完成的备份。 xtrabackup是开源的mysql热备份软件。其最新版本是8.0版。 一般来说xtrabackup最常用的是2.3和2.4两个版本。做热备份时，xtrabackup2.3针对的是mysql5.6版，xtrabackup2.4针对的是mysql5.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云RDS数据库热备份的恢复">
+<meta property="og:url" content="https:&#x2F;&#x2F;zhuyu7876.github.io&#x2F;HexoBlog&#x2F;2019&#x2F;12&#x2F;19&#x2F;%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D&#x2F;index.html">
+<meta property="og:site_name" content="ZhuYu&#39;s Blog">
+<meta property="og:description" content="阿里云RDS数据库热备份的恢复一.xtrabackup数据库热备份软件介绍阿里云的RDS数据库热备份是采用的xtrabackup备份软件完成的备份。 xtrabackup是开源的mysql热备份软件。其最新版本是8.0版。 一般来说xtrabackup最常用的是2.3和2.4两个版本。做热备份时，xtrabackup2.3针对的是mysql5.6版，xtrabackup2.4针对的是mysql5.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-19T02:03:45.000Z">
+<meta property="article:modified_time" content="2019-12-19T02:06:08.781Z">
+<meta property="article:author" content="ZhuYu">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="阿里云">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="ZhuYu&#39;s Blog" href="/HexoBlog/atom.xml">
+    
+    <link rel="shortcut icon" href="/HexoBlog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/HexoBlog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/HexoBlog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/HexoBlog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">ZhuYu</h5>
+          <a href="mailto:787626629@qq.com" title="787626629@qq.com" class="mail">787626629@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhuyu7876" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/HexoBlog/"  >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhuyu.space" target="_blank" rel="noopener"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">阿里云RDS数据库热备份的恢复</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">阿里云RDS数据库热备份的恢复</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-19T02:03:45.000Z" itemprop="datePublished" class="page-time">
+  2019-12-19
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#阿里云RDS数据库热备份的恢复"><span class="post-toc-number">1.</span> <span class="post-toc-text">阿里云RDS数据库热备份的恢复</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一-xtrabackup数据库热备份软件介绍"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一.xtrabackup数据库热备份软件介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二-恢复步骤"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">二 恢复步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-安装centos7虚拟机"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1. 安装centos7虚拟机</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-安装mysql"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2. 安装mysql</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-解压备份文件"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">3. 解压备份文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#tar-命令详解"><span class="post-toc-number">1.2.3.1.</span> <span class="post-toc-text">tar 命令详解</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-安装xtrabackup"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">4.安装xtrabackup</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-恢复数据库"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">5.恢复数据库</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三-修改mysql5-6的root密码"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">三 修改mysql5.6的root密码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-绕过密码启动"><span class="post-toc-number">1.3.0.1.</span> <span class="post-toc-text">1.绕过密码启动</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-修改root密码"><span class="post-toc-number">1.3.0.2.</span> <span class="post-toc-text">2. 修改root密码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-添加root的远程访问权限"><span class="post-toc-number">1.3.0.3.</span> <span class="post-toc-text">3.添加root的远程访问权限</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-阿里云RDS数据库热备份的恢复"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">阿里云RDS数据库热备份的恢复</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-19 10:03:45" datetime="2019-12-19T02:03:45.000Z"  itemprop="datePublished">2019-12-19</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="阿里云RDS数据库热备份的恢复"><a href="#阿里云RDS数据库热备份的恢复" class="headerlink" title="阿里云RDS数据库热备份的恢复"></a>阿里云RDS数据库热备份的恢复</h1><h2 id="一-xtrabackup数据库热备份软件介绍"><a href="#一-xtrabackup数据库热备份软件介绍" class="headerlink" title="一.xtrabackup数据库热备份软件介绍"></a>一.xtrabackup数据库热备份软件介绍</h2><p>阿里云的RDS数据库热备份是采用的xtrabackup备份软件完成的备份。</p>
+<p>xtrabackup是开源的mysql热备份软件。其最新版本是8.0版。</p>
+<p>一般来说xtrabackup最常用的是2.3和2.4两个版本。做热备份时，xtrabackup2.3针对的是mysql5.6版，xtrabackup2.4针对的是mysql5.7版。</p>
+<p>注意:xtrabackup只能在linux环境下运行。</p>
+<p>当我们要恢复数据库时，一定要搞清楚恢复的数据库版本，并安装对应的xtrabackup版本。</p>
+<h2 id="二-恢复步骤"><a href="#二-恢复步骤" class="headerlink" title="二 恢复步骤"></a>二 恢复步骤</h2><h3 id="1-安装centos7虚拟机"><a href="#1-安装centos7虚拟机" class="headerlink" title="1. 安装centos7虚拟机"></a>1. 安装centos7虚拟机</h3><h3 id="2-安装mysql"><a href="#2-安装mysql" class="headerlink" title="2. 安装mysql"></a>2. 安装mysql</h3><p>也可以先安装宝塔面板，再用宝塔面板安装mysql</p>
+<p>在centos7下用如下命令安装宝塔面板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-解压备份文件"><a href="#3-解压备份文件" class="headerlink" title="3. 解压备份文件"></a>3. 解压备份文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mkdir  data</span><br><span class="line"># tar -zxvf hins6415789_data_20190927031508.tar.gz   -C data</span><br></pre></td></tr></table></figure>
+
+<p>解压完成后，可以看到整个文件夹其实就是mysql下的data数据文件夹，但是这个文件不能直接放到mysql目录下使用，必须要用xtrabackup恢复才行。</p>
+<p>可以看到其中有一个名为xtrabackup_info的文件，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">uuid &#x3D; 844f122a-e092-11e9-aedc-7cd30ac4e8f2</span><br><span class="line">name &#x3D; </span><br><span class="line">tool_name &#x3D; innobackupex</span><br><span class="line">tool_command &#x3D; --defaults-file&#x3D;&#x2F;etc&#x2F;my3026.cnf --password&#x3D;... --user&#x3D;root --host&#x3D;127.0.0.1 --port&#x3D;3026 --tmpdir&#x3D;&#x2F;home&#x2F;mysql&#x2F;backup&#x2F;3026 --rocksdb_checkpoint_path&#x3D;&#x2F;mysqldata&#x2F;backup_tmp&#x2F;4077803_2330912 --rds-xb-fd-limits&#x3D;400000 --slave-info --stream&#x3D;tar &#x2F;home&#x2F;mysql&#x2F;backup&#x2F;3026</span><br><span class="line">tool_version &#x3D; 2.3.10</span><br><span class="line">ibbackup_version &#x3D; 2.3.10</span><br><span class="line">server_version &#x3D; 5.6.16-log</span><br><span class="line">start_time &#x3D; 2019-09-27 03:15:53</span><br><span class="line">end_time &#x3D; 2019-09-27 03:19:10</span><br><span class="line">lock_time &#x3D; 4</span><br><span class="line">binlog_pos &#x3D; filename &#39;mysql-bin.001094&#39;, position 28375, GTID of the last change &#39;6df9fe78-53f1-11e7-bb91-7cd30ac4e6a6:1-17525642&#39;</span><br><span class="line">innodb_from_lsn &#x3D; 0</span><br><span class="line">innodb_to_lsn &#x3D; 25986875480</span><br><span class="line">partial &#x3D; N</span><br><span class="line">incremental &#x3D; N</span><br><span class="line">format &#x3D; tar</span><br><span class="line">compact &#x3D; N</span><br><span class="line">compressed &#x3D; N</span><br><span class="line">encrypted &#x3D; N</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="tar-命令详解"><a href="#tar-命令详解" class="headerlink" title="tar 命令详解"></a>tar 命令详解</h4><p>tar在Linux上是常用的打包、压缩、加压缩工具，他的参数很多，折里仅仅列举常用的压缩与解压缩参数</p>
+<p>参数：<br>-c ：create 建立压缩档案的参数；<br>-x ： 解压缩压缩档案的参数；<br>-z ： 是否需要用gzip压缩；<br>-v： 压缩的过程中显示档案；<br>-f： 置顶文档名，在f后面立即接文件名，不能再加参数</p>
+<p>举例： 一，将整个/home/www/images 目录下的文件全部打包为 /home/www/images.tar</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf &#x2F;home&#x2F;www&#x2F;images.tar &#x2F;home&#x2F;www&#x2F;images ← 仅打包，不压缩</span><br><span class="line">tar -zcvf &#x2F;home&#x2F;www&#x2F;images.tar.gz &#x2F;home&#x2F;www&#x2F;images ← 打包后，以gzip压缩</span><br></pre></td></tr></table></figure>
+
+<p>在参数f后面的压缩文件名是自己取的，习惯上用tar来做，如果加z参数，则以tar.gz 或tgz来代表gzip压缩过的tar file文件</p>
+<p>1 将tgz文件解压到指定目录<br>tar zxvf test.tgz -C 指定目录<br>比如将/source/kernel.tgz解压到 /source/linux-2.6.29 目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf &#x2F;source&#x2F;kernel.tgz -C &#x2F;source&#x2F; linux-2.6.29</span><br></pre></td></tr></table></figure>
+
+<p>2 将指定目录压缩到指定文件<br>比如将linux-2.6.29 目录压缩到 kernel.tgz</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar czvf kernel.tgz linux-2.6.29</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-安装xtrabackup"><a href="#4-安装xtrabackup" class="headerlink" title="4.安装xtrabackup"></a>4.安装xtrabackup</h3><p>这里我们安装的是xtrabackup2.3版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install http:&#x2F;&#x2F;www.percona.com&#x2F;downloads&#x2F;percona-release&#x2F;redhat&#x2F;0.1-4&#x2F;percona-release-0.1-4.noarch.rp</span><br><span class="line"></span><br><span class="line">yum list | grep percona</span><br><span class="line"></span><br><span class="line">yum install percona-xtrabac</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-恢复数据库"><a href="#5-恢复数据库" class="headerlink" title="5.恢复数据库"></a>5.恢复数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># service mysqld stop   &#x2F;&#x2F;先停掉mysql服务</span><br><span class="line"># mv &#x2F;www&#x2F;server&#x2F;data &#x2F;www&#x2F;server&#x2F;databack &#x2F;&#x2F;将mysql数据库原有的data目录改名字做备份</span><br><span class="line">&#x2F;&#x2F;恢复数据库</span><br><span class="line"># xtrabackup --copy-back --target-dir&#x3D;&#x2F;home&#x2F;data</span><br><span class="line"># chown -R mysql:mysql data &#x2F;&#x2F;给data目录赋权</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-修改mysql5-6的root密码"><a href="#三-修改mysql5-6的root密码" class="headerlink" title="三 修改mysql5.6的root密码"></a>三 修改mysql5.6的root密码</h2><h4 id="1-绕过密码启动"><a href="#1-绕过密码启动" class="headerlink" title="1.绕过密码启动"></a>1.绕过密码启动</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf   <span class="comment">//打开mysql的配置文件</span></span><br><span class="line"><span class="comment">//在其中[mysqld]节点下加入下面一句话</span></span><br><span class="line">   skip-grant-tables=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>vim使用时在锁定状态下 输入i 进入编辑状态</p>
+<p>在编辑状态按esc键进入命令状态</p>
+<p>在命令状态输入 :q 是不保存修改就推出</p>
+<p>输入:wq! 是保存修改并退出。</p>
+<p>修改完毕后重启mysql服务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysqld start</span><br><span class="line">mysql -u root -p    <span class="comment">//进入mysql命令行</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-修改root密码"><a href="#2-修改root密码" class="headerlink" title="2. 修改root密码"></a>2. 修改root密码</h4><p>在mysql命令行下输入如下语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql; ##使用mysql数据库</span><br><span class="line">mysql&gt; update user set password&#x3D;password(&quot;123456&quot;) where      user&#x3D;&quot;root&quot;;##更新密码</span><br><span class="line">mysql&gt; flush privileges;##刷新权限</span><br></pre></td></tr></table></figure>
+
+<p>然后将my.cnf文件中添加的那句 skip-grant-tables=1注释掉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart &#x2F;&#x2F;重启mysql服务</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-添加root的远程访问权限"><a href="#3-添加root的远程访问权限" class="headerlink" title="3.添加root的远程访问权限"></a>3.添加root的远程访问权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39;  </span><br><span class="line">flush privileges; &#x2F;&#x2F;刷新权限</span><br></pre></td></tr></table></figure>
+
+
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-19T02:06:08.781Z" itemprop="dateUpdated">2019-12-19 10:06:08</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/" target="_blank" rel="external">https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://zhuyu7876.github.io/HexoBlog">
+            <img src="/HexoBlog/img/avatar.jpg" alt="ZhuYu">
+            ZhuYu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/HexoBlog/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/HexoBlog/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/&title=《阿里云RDS数据库热备份的恢复》 — ZhuYu's Blog&pic=https://zhuyu7876.github.io/HexoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/&title=《阿里云RDS数据库热备份的恢复》 — ZhuYu's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《阿里云RDS数据库热备份的恢复》 — ZhuYu's Blog&url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/&via=https://zhuyu7876.github.io/HexoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/HexoBlog/2019/12/19/Oracle-DataBase-DML/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Oracle DataBase DML</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/HexoBlog/2019/12/19/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        ~谢谢老板~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/HexoBlog/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/HexoBlog/img/wechat.png" data-alipay="/HexoBlog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/HexoBlog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>ZhuYu &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/&title=《阿里云RDS数据库热备份的恢复》 — ZhuYu's Blog&pic=https://zhuyu7876.github.io/HexoBlog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/&title=《阿里云RDS数据库热备份的恢复》 — ZhuYu's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《阿里云RDS数据库热备份的恢复》 — ZhuYu's Blog&url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/&via=https://zhuyu7876.github.io/HexoBlog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhuyu7876.github.io/HexoBlog/2019/12/19/%E9%98%BF%E9%87%8C%E4%BA%91RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E7%83%AD%E5%A4%87%E4%BB%BD%E7%9A%84%E6%81%A2%E5%A4%8D/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/HexoBlog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '好像崩溃了？？？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
