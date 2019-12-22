@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【笔记】G-Lab 计算机视觉实验室 | ZhuYu&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="计算机视觉,AI,实用工具，收藏">
+    <meta name="description" content="【笔记】G-Lab 计算机视觉实验室​    收藏于微信公众号推送文章，当时感觉不错，果断收藏，日后研究。  ​    链接：http:&#x2F;&#x2F;www.gwylab.com&#x2F;*  ​    首页截图： ​                                                                                                 ava">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【笔记】G-Lab 计算机视觉实验室">
+<meta property="og:url" content="https:&#x2F;&#x2F;zhuyu7876.github.io&#x2F;2019&#x2F;12&#x2F;22&#x2F;G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4&#x2F;index.html">
+<meta property="og:site_name" content="ZhuYu&#39;s Blog">
+<meta property="og:description" content="【笔记】G-Lab 计算机视觉实验室​    收藏于微信公众号推送文章，当时感觉不错，果断收藏，日后研究。  ​    链接：http:&#x2F;&#x2F;www.gwylab.com&#x2F;*  ​    首页截图： ​                                                                                                 ava">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https:&#x2F;&#x2F;ftp.bmp.ovh&#x2F;imgs&#x2F;2019&#x2F;12&#x2F;ceb8b2d397a059db.png">
+<meta property="article:published_time" content="2019-12-22T08:12:05.000Z">
+<meta property="article:modified_time" content="2019-12-22T08:35:07.915Z">
+<meta property="article:author" content="ZhuYu">
+<meta property="article:tag" content="计算机视觉">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="实用工具，收藏">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;ftp.bmp.ovh&#x2F;imgs&#x2F;2019&#x2F;12&#x2F;ceb8b2d397a059db.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="ZhuYu&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">ZhuYu</h5>
+          <a href="mailto:787626629@qq.com" title="787626629@qq.com" class="mail">787626629@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zhuyu7876" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhuyu.space/Blog.github.io/" target="_blank" rel="noopener"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【笔记】G-Lab 计算机视觉实验室</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【笔记】G-Lab 计算机视觉实验室</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-22T08:12:05.000Z" itemprop="datePublished" class="page-time">
+  2019-12-22
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#【笔记】G-Lab-计算机视觉实验室"><span class="post-toc-number">1.</span> <span class="post-toc-text">【笔记】G-Lab 计算机视觉实验室</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传送门："><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">传送门：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成日志目录"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">生成日志目录</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-G-LAb-计算机视觉实验室"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【笔记】G-Lab 计算机视觉实验室</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-22 16:12:05" datetime="2019-12-22T08:12:05.000Z"  itemprop="datePublished">2019-12-22</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="【笔记】G-Lab-计算机视觉实验室"><a href="#【笔记】G-Lab-计算机视觉实验室" class="headerlink" title="【笔记】G-Lab 计算机视觉实验室"></a>【笔记】G-Lab 计算机视觉实验室</h1><p>​    收藏于微信公众号推送文章，当时感觉不错，果断收藏，日后研究。</p>
+<blockquote>
+<p>​    <strong>链接：<a href="http://www.gwylab.com/" target="_blank" rel="noopener">http://www.gwylab.com/</a>*</strong></p>
+</blockquote>
+<p>​    首页截图：</p>
+<p>​    <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ftp.bmp.ovh/imgs/2019/12/ceb8b2d397a059db.png" alt="avatar" title>
+                </div>
+                <div class="image-caption">avatar</div>
+            </figure></p>
+<p>​    个人比较感兴趣 “人脸生成” </p>
+<blockquote>
+<h3 id="传送门："><a href="#传送门：" class="headerlink" title="传送门："></a>传送门：</h3></blockquote>
+<h2 id="生成日志目录"><a href="#生成日志目录" class="headerlink" title="生成日志目录"></a><strong>生成日志目录</strong></h2><table>
+<thead>
+<tr>
+<th align="left">代数</th>
+<th align="left">标签</th>
+<th align="left">生成器</th>
+<th align="left">生成样本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="http://seeprettyface.com/index.html#epoch1" target="_blank" rel="noopener">第1代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index.html#epoch1" target="_blank" rel="noopener">高颜值</a></td>
+<td align="left">官方（<a href="https://github.com/NVlabs/stylegan" target="_blank" rel="noopener">Github</a>）</td>
+<td align="left">/</td>
+</tr>
+<tr>
+<td align="left"><a href="http://seeprettyface.com/index_page2.html" target="_blank" rel="noopener">第2代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index_page2.html" target="_blank" rel="noopener">更高颜值</a></td>
+<td align="left">官方+颜值分类器</td>
+<td align="left">/</td>
+</tr>
+<tr>
+<td align="left"><a href="http://seeprettyface.com/index_page3.html" target="_blank" rel="noopener">第3代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index_page3.html" target="_blank" rel="noopener">“萌娃”特辑</a></td>
+<td align="left">萌娃脸生成器（<a href="https://github.com/a312863063/seeprettyface-generator-babies" target="_blank" rel="noopener">Github</a>）</td>
+<td align="left"><a href="https://pan.baidu.com/s/1JfyZYyfGzdO6TgKzOuWa0Q" target="_blank" rel="noopener">1万张</a>（提取码：75AG）</td>
+</tr>
+<tr>
+<td align="left"><a href="http://seeprettyface.com/index_page4.html" target="_blank" rel="noopener">第4代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index_page4.html" target="_blank" rel="noopener">“最美笑容”特辑</a></td>
+<td align="left">官方+笑容分类器</td>
+<td align="left"><a href="https://pan.baidu.com/s/1WBMDNDHpaGIaGQQCWHbpaA" target="_blank" rel="noopener">5万张</a>（提取码：AHU3）</td>
+</tr>
+<tr>
+<td align="left"><a href="http://seeprettyface.com/index_page5.html" target="_blank" rel="noopener">第5代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index_page5.html" target="_blank" rel="noopener">“中国姑娘”特辑</a></td>
+<td align="left">黄种人脸生成器（<a href="https://github.com/a312863063/seeprettyface-generator-yellow" target="_blank" rel="noopener">Github</a>）</td>
+<td align="left"><a href="https://pan.baidu.com/s/1X2RTqKKhG5mXx0d4HzfZLg" target="_blank" rel="noopener">5万张</a>（提取码：A01B）</td>
+</tr>
+<tr>
+<td align="left"><a href="http://seeprettyface.com/index_page6.html" target="_blank" rel="noopener">第6代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index_page6.html" target="_blank" rel="noopener">“类现实名人”特辑</a></td>
+<td align="left">现实人脸编码器</td>
+<td align="left"><a href="http://seeprettyface.com/index_page6.html" target="_blank" rel="noopener">20张</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://seeprettyface.com/index_page7.html" target="_blank" rel="noopener">第7代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index_page7.html" target="_blank" rel="noopener">“中国明星”特辑</a></td>
+<td align="left">明星脸生成器（<a href="https://github.com/a312863063/seeprettyface-generator-star" target="_blank" rel="noopener">Github</a>）</td>
+<td align="left"><a href="https://pan.baidu.com/s/1g5ASVZcRoYvClxqsQpShXQ" target="_blank" rel="noopener">1万张</a>（提取码：XVAL）</td>
+</tr>
+<tr>
+<td align="left"><a href="http://seeprettyface.com/index_page8.html" target="_blank" rel="noopener">第8代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index_page8.html" target="_blank" rel="noopener">“中国网红”特辑</a></td>
+<td align="left">网红脸生成器（<a href="https://github.com/a312863063/seeprettyface-generator-wanghong" target="_blank" rel="noopener">Github</a>）</td>
+<td align="left"><a href="https://pan.baidu.com/s/1Sn6j9g-8sddIvViGEawAWQ" target="_blank" rel="noopener">1万张</a>（提取码：3IQT）</td>
+</tr>
+<tr>
+<td align="left"><a href="http://seeprettyface.com/index_page9.html" target="_blank" rel="noopener">第9代</a></td>
+<td align="left"><a href="http://seeprettyface.com/index_page9.html" target="_blank" rel="noopener">“超模”特辑</a></td>
+<td align="left">超模脸生成器（<a href="https://github.com/a312863063/seeprettyface-generator-model" target="_blank" rel="noopener">Github</a>）</td>
+<td align="left"><a href="https://pan.baidu.com/s/1G5lTsk1TJPZMCHqudQqqYg" target="_blank" rel="noopener">1万张</a>（提取码：2A5W）</td>
+</tr>
+<tr>
+<td align="left">附</td>
+<td align="left"></td>
+<td align="left">人脸属性编辑器（<a href="https://github.com/a312863063/seeprettyface-face_editor" target="_blank" rel="noopener">Github</a>）</td>
+<td align="left">//适用于所有上述生成器</td>
+</tr>
+<tr>
+<td align="left">新</td>
+<td align="left"><a href="https://github.com/a312863063/generators-with-stylegan2" target="_blank" rel="noopener">基于StyleGAN2重制</a></td>
+<td align="left">含上述所有生成器（<a href="https://github.com/a312863063/generators-with-stylegan2" target="_blank" rel="noopener">Github</a>）</td>
+<td align="left">//消除伪影和损坏现象</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>转自：<a href="http://seeprettyface.com/index.html" target="_blank" rel="noopener">http://seeprettyface.com/index.html</a></strong></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-22T08:35:07.915Z" itemprop="dateUpdated">2019-12-22 16:35:07</time>
+</span><br>
+
+
+        
+        你好鸭！
+        
+    </div>
+    
+    <footer>
+        <a href="https://zhuyu7876.github.io">
+            <img src="/img/avatar.jpg" alt="ZhuYu">
+            ZhuYu
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%EF%BC%8C%E6%94%B6%E8%97%8F/" rel="tag">实用工具，收藏</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/&title=《【笔记】G-Lab 计算机视觉实验室》 — ZhuYu's Blog&pic=https://zhuyu7876.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/&title=《【笔记】G-Lab 计算机视觉实验室》 — ZhuYu's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【笔记】G-Lab 计算机视觉实验室》 — ZhuYu's Blog&url=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/&via=https://zhuyu7876.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/20/%E8%80%83%E7%A0%94%E5%BF%85%E4%B8%8A%E5%B2%B8/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">考研必上岸</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "to7qfUod2vpBlALFlvOwxhKd-gzGzoHsz",
+            appKey: "2KxKVIrN7jBFnKNffUGKEmzl",
+            avatar: "retro",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        ~谢谢老板~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>ZhuYu &copy; 2019</span>
+            <span>
+                
+                Power by <a href="https://www.zhuyu.space" target="_blank">ZhuYu</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/&title=《【笔记】G-Lab 计算机视觉实验室》 — ZhuYu's Blog&pic=https://zhuyu7876.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/&title=《【笔记】G-Lab 计算机视觉实验室》 — ZhuYu's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【笔记】G-Lab 计算机视觉实验室》 — ZhuYu's Blog&url=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/&via=https://zhuyu7876.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhuyu7876.github.io/2019/12/22/G-LAb-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E9%AA%8C%E5%AE%A4/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '好像崩溃了？？？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
